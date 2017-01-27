@@ -7,18 +7,25 @@ Square class representing a square quadrant of the "universe"
 public class Square {
 
 	private double xmin, ymin, len;
-	
 
+	//initiates new square with the bottomleft most point and the square length
 	public Square(double bottomLeftX,double bottomLeftY, double length) {
 		xmin = bottomLeftX;
 		len = length;
 		ymin = bottomLeftY;
 	
 	}
+	
+	
+	//returns square length
+	public double getLen(){
+		return len;
+	}
 
 	//determines if a set of coordinate points are within the square
 	public boolean contains(double x, double y){
-		return  (xmin < x && x < (xmin+len) && ymin < y && y < (ymin+len));
+		
+		return  (xmin <= x && x < (xmin+len) && ymin <= y && y < (ymin+len));
 	}
 	
 	
