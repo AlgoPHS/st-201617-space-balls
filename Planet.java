@@ -64,7 +64,7 @@ public class Planet {
 	}
 
 	
-	//returns true if the planet is contained within a square quadrant
+	//returns true if the planet is contained within a square quadrant.
 	public boolean isIn(Square s) {
 
 		return s.contains(x, y);
