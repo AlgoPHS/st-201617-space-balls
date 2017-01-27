@@ -62,22 +62,13 @@ public class NBody_Tree {
 	
 	
 	
-//initializes universe with first quadrant being having side lengths equal to the scale
+	//initializes universe with first quadrant being having side lengths equal to the scale
 	public NBody_Tree(double scale) {
 		root = new Node(new Square(0, 0, scale));
 	}
 
 	public void addBody(Planet p) {
 		add(root, p);
-	}
-
-	private void add(Node n, Planet b) {
-
-	
-		
-		
-		
-		
 	}
 
 	
@@ -105,7 +96,49 @@ public class NBody_Tree {
 	}
 	
 	
-	
+	private void add(Node n, Planet b) {
+        if(isInternalNode(n))
+        {
+            double nodex , nodey, squarex, squarey;
+            nodex = b.getPos()[0];
+            nodey = b.getPos()[1];
+            squarex = (n.space.getX()[1] + n.space.getX()[0]) / 2;
+            squarey = (n.space.getY()[1] + n.space.getY()[0]) / 2;
+            if(nodex > squarex)
+            {
+                if(nodey > squarey)
+                {
+                    add(n.ur , b);
+                }
+                else
+                {
+                    add(n.dr , b);
+                }
+            }
+            else
+            {
+                if(nodey < squarey)
+                {
+                    add(n.ul , b);
+                }
+                else
+                {
+                    add(n.dl , b);
+                }
+            }
+        }
+        else if(isPlanet(n))
+        {
+            Planet p = n.info;
+            n.setPlanet(null);
+            add(n , p);
+            add(n , b);
+        }
+        else
+        {
+            n.setPlanet(b);
+        }
+    }
 	
 	public static void main(String[] args){
 		
