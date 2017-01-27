@@ -64,10 +64,21 @@ public class Planet {
 	}
 
 	
-	//returns true if the planet is contained within a square quadrant.
+	//returns true if the planet is contained within a square quadrant
 	public boolean isIn(Square s) {
 
 		return s.contains(x, y);
 	}
+
+	
+	//adds mass to the body
+	public void updateCenterOfMass(Planet p){
+	
+		x = ((x*mass)+(p.getPos()[0]*p.getMass()))/(mass+p.getMass());
+		y = ((y*mass)+(p.getPos()[1]*p.getMass()))/(mass+p.getMass());
+		mass += p.getMass();
+	}
+	
+
 
 }
