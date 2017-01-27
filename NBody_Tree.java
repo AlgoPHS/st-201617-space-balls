@@ -29,7 +29,7 @@ public class NBody_Tree {
 		public void drawQuad(){
 			StdDraw.setPenColor(StdDraw.BLACK);
 			StdDraw.square((space.getX()[0]+space.getX()[1])/2, (space.getY()[0]+space.getY()[1])/2, (space.getX()[1]-space.getX()[0])/2);
-			
+			StdDraw.point(info.getPos()[0], info.getPos()[1]);
 			
 		}
 		
@@ -54,6 +54,13 @@ public class NBody_Tree {
 	
 	
 	
+	//this ratio is used to see if a body's force should be used to determine if a sole planet's force should be
+	//taken or if the center of mass of the general area.
+	// if theta ==1, it will be most accurate but will be brute force
+	// if theta ==0, it will be the least accurate but be quickest
+	private double theta = .5;
+	
+	
 	
 //initializes universe with first quadrant being having side lengths equal to the scale
 	public NBody_Tree(double scale) {
@@ -66,20 +73,44 @@ public class NBody_Tree {
 
 	private void add(Node n, Planet b) {
 
+	
+		
+		
+		
+		
 	}
 
+	
+	//determines if a node is internal, where it is the parent to many different planets
+	private boolean isInternalNode(Node x){
+		
+		if(isPlanet(x))return false;
+		else return internal(x.ur) || internal(x.dr) || internal(x.dl) || internal(x.ul);
+		
+	}
+	
+	//recursive function that traverses the quadtree
+	private boolean internal(Node x){
+		if(isPlanet(x))return true;
+		else return internal(x.ur) || internal(x.dr) || internal(x.dl) || internal(x.ul);
+	}
+	
+	
 	// If a node has no children AND has a non-null planet class, it has a
 	private boolean isPlanet(Node n) {
 		if (n == null)
 			return false;
 		else
-			return n.ul == null && n.ur == null && n.dl == null && n.dr == null;
+			return n.ul == null && n.ur == null && n.dl == null && n.dr == null && n.info != null;
 	}
 	
 	
 	
 	
 	public static void main(String[] args){
+		
+		
+		
 		
 		
 		
