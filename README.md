@@ -18,9 +18,8 @@ y = (y1m1 + y2m2) / m
 The data structure we use is the quad-ST-tree, the node has a planet, and its 
 corresponding square representing 2d space. The root node represents the whole
 plane, with children splitting it up evenly into 4 squares. The symbol table
-works well, bc we need to store 2 different objects and build a data structure.
-We chose this program because Brendan is a space fanatic and also an oppressive
-dictator that wouldn't let Chris do the smooth zoom.
+is utilized as the key stores a square plane where each node value is a planet
+body in itself. We chose this program because Brendan is a space fanatic.
 
 
 ENJOY 
