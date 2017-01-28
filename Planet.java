@@ -24,6 +24,24 @@ public class Planet {
 		ay = 0;
 	}
 
+	
+	//constructor duplicates a planet
+	
+	
+	public Planet(Planet p){
+
+		mass = p.mass;
+		x = p.x;
+		y = p.y;
+		vx = p.vx;
+		vy = p.vy;
+		ax = p.ax;
+		ay = p.ay;
+		
+		
+	}
+	
+	
 	// returns planet mass
 	public double getMass() {
 		return mass;
@@ -64,6 +82,10 @@ public class Planet {
 	}
 
 	
+	
+	
+	
+	
 	//returns true if the planet is contained within a square quadrant
 	public boolean isIn(Square s) {
 
@@ -77,6 +99,12 @@ public class Planet {
 		x = ((x*mass)+(p.getPos()[0]*p.getMass()))/(mass+p.getMass());
 		y = ((y*mass)+(p.getPos()[1]*p.getMass()))/(mass+p.getMass());
 		mass += p.getMass();
+	}
+	
+	
+	
+	public String toString(){
+		return x+" "+y+" "+mass;
 	}
 	
 
