@@ -14,7 +14,8 @@ The data structure we use is the quad-ST-tree, the node has a planet, and its
 corresponding square representing 2d space. The root node represents the whole
 plane, with children splitting it up evenly into 4 squares. The symbol table
 is utilized as the key stores a square plane where each node value is a planet
-body in itself. We chose this program because Brendan is a space fanatic.
+body in itself. We chose this program because space is amazing and this is a lot more fun than 
+a zooming algorithm
 
 
 ENJOY 
