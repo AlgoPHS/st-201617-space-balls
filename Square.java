@@ -1,43 +1,47 @@
 /*
-Brendan DeMilt
-1/19/17
+Brendan DeMilt Chris Pan
 Period: 8
-Square class representing a square quadrant of the "universe"
+Object that represents a quadrant of space
  */
 public class Square {
-
-	private double xmin, ymin, len;
-
-	//initiates new square with the bottomleft most point and the square length
-	public Square(double bottomLeftX,double bottomLeftY, double length) {
-		xmin = bottomLeftX;
+	
+	private double x,y,len;
+	public Square(double bottomX, double bottomY, double length){
+		x = bottomX;
+		y = bottomY;
 		len = length;
-		ymin = bottomLeftY;
-	
 	}
 	
 	
-	//returns square length
+	//returns bottom left corner of the square, plus the length
+	public double[] getBottom(){
+		double[] pos = {this.x,this.y};
+		return pos;
+	}
+	
 	public double getLen(){
-		return len;
+		return this.len;
 	}
-
-	//determines if a set of coordinate points are within the square
-	public boolean contains(double x, double y){
+	
+	
+	//determines if a planet object is inside of a square
+	public boolean contains(Planet b){
+		return x <= b.getPos()[0] && b.getPos()[0] <= (x+len) && y <= b.getPos()[1] && b.getPos()[1] <= (y+len);
 		
-		return  (xmin <= x && x < (xmin+len) && ymin <= y && y < (ymin+len));
 	}
 	
 	
-	// returns x coordinate range
-	public double[] getX() {
-		double[] pos = { xmin, xmin+len };
-		return pos;
+	
+	//draws the current square for debugging purposes
+	public void draw(){
+		StdDraw.setPenRadius(.0001);
+		StdDraw.setPenColor(StdDraw.WHITE);
+		StdDraw.square(this.x+this.len/2,this.y+this.len/2, this.len/2);
+		StdDraw.setPenRadius(.002);
 	}
+	
+	
+	
+	
 
-	// returns y coordinate range
-	public double[] getY() {
-		double pos[] = { ymin, ymin+len };
-		return pos;
-	}
 }

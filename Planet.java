@@ -1,112 +1,101 @@
+import java.awt.Color;
+
 /*
-Brendan DeMilt
-1/19/17
+Brendan DeMilt, Chris Pan
 Period: 8
-Planet class containing information about each celestial body simulated
+Stores celestial body information
  */
-public class Planet {
-
-	private double mass;
-	private double x;
-	private double y;
-	private double vx;
-	private double vy;
-	private double G = 6.67e-11;
-	private double ax, ay;
-
-	public Planet(double m, double xe, double ye, double vex, double vey) {
-		mass = m;
-		x = xe;
-		y = ye;
-		vx = vex;
-		vy = vey;
-		ax = 0;
-		ay = 0;
-	}
-
-	
-	//constructor duplicates a planet
-	
-	
-	public Planet(Planet p){
-
-		mass = p.mass;
-		x = p.x;
-		y = p.y;
-		vx = p.vx;
-		vy = p.vy;
-		ax = p.ax;
-		ay = p.ay;
+	public class Planet{
+		
+		
+		private double x,y,vx,vy,fx,fy,m;
+		private double G = 6.67e-11;
+		
+		//initializes planet
+		public Planet(double xe, double ye, double vex, double vey, double mass){
+			x = xe;
+			y = ye;
+			vx = vex;
+			vy =  vey;
+			m = mass;
+			
+		}
+		
+		public double getMass(){
+			return this.m;
+		}
+		
+		//calculates euclidean distance between bodies
+		public double distance(Planet b){
+			double dx = b.x-this.x;
+			double dy = b.y-this.y;
+			
+			return Math.sqrt(dx*dx+dy*dy);
+		}
+		
+		//returns body position coordinates
+		public double[] getPos(){
+			double[] pos = {this.x,this.y};
+			return pos;
+		}
+		
+		
+		//adds to the net force if the body
+		public void addForce(Planet p){
+			//this double ensures the planets don't get close enough to go haywire
+			double setDistance = 3e4;
+			
+			
+			
+			if(this!=p ){
+			double f = (G*this.m*p.m)/((distance(p)*distance(p) + setDistance*setDistance));
+			fx += f*(p.x-this.x)/distance(p);
+			fy += f*(p.y-this.y)/distance(p);}
+			
+			
+		}
+		
+		
+		//used if this object is inside an internal node, updates its center of mass
+		public Planet newCOM(Planet p){
+			double newMass = this.m + p.m;
+			double newX = ((this.x*this.m)+ (p.x*p.m))/newMass;			
+			double newY = ((this.y*this.m)+ (p.y*p.m))/newMass;		
+			return new Planet(newX,newY, 0,0,newMass);
+		}
+		
+		
+		
+		//determines if a planet is inside of a square
+		public boolean isIn(Square s){
+			return s.contains(this);
+		}
+		
+		//applies net force to accelerate the planet in a given direction
+		public void updatebody(double t){
+			
+			this.vx+= fx*t/this.m;
+			this.vy+= fy*t/this.m;
+			
+			this.x += vx*t;
+			this.y += vy*t;
+			
+			
+			
+		}
+		
+		//resets net force
+		public void resetForce(){
+			this.fx = 0;
+			this.fy = 0;
+		}
+		
+		//draws the planet
+		public void draw(){
+			StdDraw.setPenColor(StdDraw.WHITE);
+			StdDraw.point(this.x,this.y);
+		}
 		
 		
 	}
 	
-	
-	// returns planet mass
-	public double getMass() {
-		return mass;
-	}
-
-	// returns position of a planet in a coordinate array
-	public double[] getPos() {
-		double[] pos = { x, y };
-		return pos;
-	}
-
-	// distance between two planets
-	public double dist(Planet b) {
-		return Math.sqrt(Math.pow(x + b.getPos()[0], 2) + Math.pow(y + b.getPos()[1], 2));
-	}
-
-	// adds another force to the net acceleration of the body
-	public void addforce(Planet b) {
-		double F = (G * b.getMass() * mass) / dist(b);
-		ax += (F * (x - b.getPos()[0] / dist(b))) / mass;
-		ay += (F * (y - b.getPos()[1] / dist(b))) / mass;
-	}
-
-	// resets net force acted on planet, usually in preperation for the next
-	// iteration
-	public void resetForce() {
-		ax = 0;
-		ay = 0;
-	}
-
-	// uses net force to update planet velocity, also changes coordinates based
-	//on new velocity and the time passed
-	public void updatebody(double timeChange) {
-		vx += ax;
-		vy += ay;
-		x += vx * timeChange;
-		y += vy * timeChange;
-	}
-
-	
-	
-	
-	
-	
-	//returns true if the planet is contained within a square quadrant
-	public boolean isIn(Square s) {
-
-		return s.contains(x, y);
-	}
-
-	
-	//adds mass to the body
-	public void updateCenterOfMass(Planet p){
-	
-		x = ((x*mass)+(p.getPos()[0]*p.getMass()))/(mass+p.getMass());
-		y = ((y*mass)+(p.getPos()[1]*p.getMass()))/(mass+p.getMass());
-		mass += p.getMass();
-	}
-	
-	
-	
-	public String toString(){
-		return x+" "+y+" "+mass;
-	}
-	
-
-
-}
