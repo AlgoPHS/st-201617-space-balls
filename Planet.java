@@ -43,11 +43,12 @@ Stores celestial body information
 		//adds to the net force if the body
 		public void addForce(Planet p){
 			//this double ensures the planets don't get close enough to go haywire
-			double setDistance = 3e4;
+			double setDistance = 9e3;
 			
 			
-			
-			if(this!=p ){
+			if(this!=p){
+				
+				
 			double f = (G*this.m*p.m)/((distance(p)*distance(p) + setDistance*setDistance));
 			fx += f*(p.x-this.x)/distance(p);
 			fy += f*(p.y-this.y)/distance(p);}

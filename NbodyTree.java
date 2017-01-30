@@ -53,7 +53,7 @@ public class NbodyTree {
 	//if theta ==0, most accurate but brute force :(
 	//if theta ==1, quickest but least accurate :(
 	//the standard is .5 since it's a happy mix in between :)
-	private double theta = .5;
+	private double theta =0.5;
 	
 	
 	//root node
