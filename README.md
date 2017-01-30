@@ -24,4 +24,5 @@ ENJOY
 More information on the barnes hut algorithm:
 http://arborjs.org/docs/barnes-hut
 
-
+For an interactive link, check out:
+http://www.stefanom.org/bh-tree/
