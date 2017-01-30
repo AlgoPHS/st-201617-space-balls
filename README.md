@@ -33,4 +33,4 @@ compile:
 javac SpaceBalls.java
 
 run:
-java spaceBalls < galaxyformation.txt
+java SpaceBalls < galaxyformation.txt
