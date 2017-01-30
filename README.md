@@ -21,7 +21,7 @@ a zooming algorithm
 ENJOY 
 
 
-More information on the barnes but algorithm:
+More information on the barnes hut algorithm:
 http://arborjs.org/docs/barnes-hut
 
 
