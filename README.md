@@ -26,3 +26,11 @@ http://arborjs.org/docs/barnes-hut
 
 For an interactive link, check out:
 http://www.stefanom.org/bh-tree/
+
+
+TO RUN:
+compile:
+javac SpaceBalls.java
+
+run:
+java spaceBalls < galaxyformation.txt
