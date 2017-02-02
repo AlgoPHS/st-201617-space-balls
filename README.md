@@ -34,3 +34,6 @@ javac SpaceBalls.java
 
 run:
 java SpaceBalls < galaxyformation.txt
+
+
+a good time change value is .1 as any large number will be too quick for you to see
